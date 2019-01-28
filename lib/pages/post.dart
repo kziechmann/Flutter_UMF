@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class PostPage extends StatelessWidget {
@@ -8,7 +9,10 @@ class PostPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope( onWillPop: () {
+      Navigator.pop(context, false);
+      return Future.value(false);
+    } ,child: Scaffold(
       appBar: AppBar(
         title: Text('title'),
       ),
@@ -30,6 +34,8 @@ class PostPage extends StatelessWidget {
           )
         ],
       ),
+    ),
     );
-  }
+}
+
 }

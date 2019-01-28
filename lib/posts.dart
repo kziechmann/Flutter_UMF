@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 class Posts extends StatelessWidget {
   final List<String> posts;
 
-  Posts(this.posts);
+  
+
+  Posts(this.posts){
+
+  }
 
   @override
   Widget build(BuildContext context) {

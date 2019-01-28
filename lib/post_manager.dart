@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import './posts.dart';
 
 class PostManager extends StatefulWidget {
+  final String startingPost;
+
+  PostManager({this.startingPost = 'Mountain Post'}){
+
+  }
+  
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -11,22 +18,33 @@ class PostManager extends StatefulWidget {
 }
 
 class _PostManagerState extends State<PostManager> {
-  List<String> _posts = ['OutdoorPost'];
+  List<String> _posts = [];
+
+  @override
+  void initState(){
+    _posts.add(widget.startingPost);
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [Container(
-      margin: EdgeInsets.all(10.0),
-      child: RaisedButton(
-        onPressed: () {
-          setState(() {
-            _posts.add('MountainPost');
-          });
-        },
-        child: Text('Add Post'),
-      ),
-    ),
-    Posts(_posts)
-    ],);
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.all(10.0),
+          child: RaisedButton(
+            color: Theme.of(context).primaryColor,
+            onPressed: () {
+              setState(() {
+                _posts.add('MountainPost');
+              });
+            },
+            child: Text('Add Post'),
+          ),
+        ),
+        Posts(_posts)
+      ],
+    );
   }
 }

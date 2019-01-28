@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import './posts.dart';
 
 class PostManager extends StatefulWidget {

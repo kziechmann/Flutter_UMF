@@ -9,21 +9,23 @@ class Posts extends StatelessWidget {
 
   }
 
+  Widget _buildPost(BuildContext context, int index) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Image.asset('assets/mountains.jpg'),
+          Text(posts[index])
+        ],
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: posts
-          .map(
-            (element) => Card(
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset('assets/mountains.jpg'),
-                      Text(element)
-                    ],
-                  ),
-                ),
-          )
-          .toList(),
+    return ListView.builder(
+      itemBuilder: _buildPost,
+      itemCount: posts.length,
     );
   }
 }

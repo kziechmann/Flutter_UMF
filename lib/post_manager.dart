@@ -12,7 +12,6 @@ class PostManager extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _PostManagerState();
   }
 }
@@ -24,6 +23,12 @@ class _PostManagerState extends State<PostManager> {
   void initState(){
     _posts.add(widget.startingPost);
     super.initState();
+  }
+
+   void _addPost(String post) {
+    setState(() {
+      _posts.add(post);
+    });
   }
 
 
@@ -43,7 +48,7 @@ class _PostManagerState extends State<PostManager> {
             child: Text('Add Post'),
           ),
         ),
-        Posts(_posts)
+        Expanded(child: Posts(_posts))
       ],
     );
   }

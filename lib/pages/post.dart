@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 
+class PostPage extends StatelessWidget {
+  final String title;
+  final String imageUrl;
 
-class PostPage extends StatelessWidget{
+  PostPage(this.title, this.imageUrl);
+
   @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Post Detail'),
-        ),
-        body: Column(
-          children: <Widget>[
-            Image.asset('assets/mountains.jpg'),
-            Text('Image Description'),
-            RaisedButton(child: Text('Back to Feed'), onPressed: () => Navigator.pop(context),)
-          ], ),
-      );
-    }
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('title'),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(imageUrl),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: Text(title),
+          ),
+          Container(
+            padding: EdgeInsets.all(10.0),
+            child: RaisedButton(
+              color: Theme.of(context).accentColor,
+              child: Text('Back to Feed'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }

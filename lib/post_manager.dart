@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import './posts.dart';
 
 class PostManager extends StatefulWidget {
-  final String startingPost;
+  final Map<String,String> startingPost;
 
   PostManager({this.startingPost}){
 
@@ -16,7 +16,7 @@ class PostManager extends StatefulWidget {
 }
 
 class _PostManagerState extends State<PostManager> {
-  List<String> _posts = [];
+  final List<Map<String,String>> _posts = [];
 
   @override
   void initState(){
@@ -27,7 +27,7 @@ class _PostManagerState extends State<PostManager> {
     super.initState();
   }
 
-   void _addPost(String post) {
+   void _addPost(Map<String, String> post) {
     setState(() {
       _posts.add(post);
     });
@@ -44,7 +44,7 @@ class _PostManagerState extends State<PostManager> {
             color: Theme.of(context).primaryColor,
             onPressed: () {
               setState(() {
-                _posts.add('MountainPost');
+                _posts.add({'title': 'MountainPost', 'image': 'assets/mountains.jpg'});
               });
             },
             child: Text('Add Post'),

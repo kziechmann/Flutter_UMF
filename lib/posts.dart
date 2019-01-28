@@ -2,25 +2,31 @@ import 'package:flutter/material.dart';
 import './pages/post.dart';
 
 class Posts extends StatelessWidget {
-  final List<String> posts;
+  final List<Map<String, String>> posts;
 
   Posts(this.posts) {}
 
-  Widget _buildPost(BuildContext context, int index) {
+  Widget _buildPost(
+    BuildContext context,
+    int index,
+  ) {
     return Card(
       child: Column(
         children: <Widget>[
-          Image.asset('assets/mountains.jpg'),
-          Text(posts[index]),
+          Image.asset(posts[index]['image']),
+          Text(posts[index]['title']),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
                 child: Text('Details'),
                 onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => PostPage())),
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => PostPage(
+                            posts[index]['title'], posts[index]['image']),
+                      ),
+                    ),
               )
             ],
           )

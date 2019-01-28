@@ -5,7 +5,7 @@ import './posts.dart';
 class PostManager extends StatefulWidget {
   final String startingPost;
 
-  PostManager({this.startingPost = 'Mountain Post'}){
+  PostManager({this.startingPost}){
 
   }
   
@@ -21,7 +21,10 @@ class _PostManagerState extends State<PostManager> {
 
   @override
   void initState(){
-    _posts.add(widget.startingPost);
+    if (widget.startingPost != null) {
+      _posts.add(widget.startingPost);
+    }
+
     super.initState();
   }
 

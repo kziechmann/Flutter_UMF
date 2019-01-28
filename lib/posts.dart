@@ -23,9 +23,9 @@ class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return posts.length > 0 ? ListView.builder(
       itemBuilder: _buildPost,
       itemCount: posts.length,
-    );
+    ) : Center(child: Text('No posts found!'));
   }
 }

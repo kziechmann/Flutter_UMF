@@ -34,6 +34,12 @@ class _PostManagerState extends State<PostManager> {
   }
 
 
+   void _removePost(int index) {
+    setState(() {
+      _posts.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,7 +56,7 @@ class _PostManagerState extends State<PostManager> {
             child: Text('Add Post'),
           ),
         ),
-        Expanded(child: Posts(_posts))
+        Expanded(child: Posts(_posts, removePost: _removePost))
       ],
     );
   }

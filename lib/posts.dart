@@ -3,8 +3,9 @@ import './pages/post.dart';
 
 class Posts extends StatelessWidget {
   final List<Map<String, String>> posts;
+  final Function removePost;
 
-  Posts(this.posts) {}
+  Posts(this.posts, {this.removePost}) {}
 
   Widget _buildPost(
     BuildContext context,
@@ -20,13 +21,17 @@ class Posts extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                 child: Text('Details'),
-                onPressed: () => Navigator.push(
+                onPressed: () => Navigator.push<bool>(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => PostPage(
                             posts[index]['title'], posts[index]['image']),
                       ),
-                    ),
+                    ).then((bool value){
+                      if (value) {
+                        removePost(index);
+                      }
+                    }),
               )
             ],
           )

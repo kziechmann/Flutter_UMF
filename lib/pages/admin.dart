@@ -3,10 +3,11 @@ import 'postList.dart';
 import 'createPost.dart';
 
 class PostsAdminPage extends StatelessWidget {
+  final List<Map<String, String>> posts;
   final Function addPost;
   final Function removePost;
 
-  PostsAdminPage( this.addPost, this.removePost);
+  PostsAdminPage( this.addPost, this.removePost, this.posts);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class PostsAdminPage extends StatelessWidget {
       body: TabBarView(
         children: <Widget>[
           CreatePostsPage( this.addPost),
-          PostListPage(),
+          PostListPage(this.posts),
         ],
         ),
       )

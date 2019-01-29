@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CreatePostsPage extends StatefulWidget {
-  final Function addProduct;
+  final Function addPost;
 
-  CreatePostsPage(this.addProduct);
+  CreatePostsPage(this.addPost);
 
   @override
   State<StatefulWidget> createState() {
@@ -12,30 +12,56 @@ class CreatePostsPage extends StatefulWidget {
 }
 
 class _CreatePostsPageState extends State<CreatePostsPage> {
-  String titleValue = '';
-  String descriptionValue = '';
+  final Map<String, dynamic> _formData = {
+    'title': null,
+    'description': null,
+    'image': 'assets/mountains.jpg'
+  };
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _submitForm() {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
+    widget.addPost(_formData);
+    Navigator.pushReplacementNamed(context, '/posts');
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child:Container(
       margin: EdgeInsets.all(10.0),
-      child: ListView(
+      child: Form(
+        key: _formKey,
+        child:ListView(
         children: <Widget>[
-          TextField(
+          TextFormField(
             decoration: InputDecoration(labelText: 'Post Title'),
-            onChanged: (String value) {
-              setState(() {
-                titleValue = value;
-              });
+            validator: (String value) {
+              if (value.isEmpty || value.length < 5) {
+                return 'Title is required and should be 5+ characters long.';
+              }
+            },
+            onSaved: (String value) {
+                _formData['title'] = value;
             },
           ),
-          TextField(
+          TextFormField(
             decoration: InputDecoration(labelText: 'Caption'),
             maxLines: 5,
-            onChanged: (String value) {
-              setState(() {
-                descriptionValue = value;
-              });
+            onSaved: (String value) {
+                _formData['description'] = value;
+            },
+            validator: (String value) {
+              if (value.isEmpty || value.length < 10) {
+                return 'Description is required and should be 10+ characters long.';
+              }
             },
           ),
           SizedBox(
@@ -44,17 +70,11 @@ class _CreatePostsPageState extends State<CreatePostsPage> {
           RaisedButton(
             color: Theme.of(context).accentColor,
             child: Text('Post Image'),
-            onPressed: () {
-              final Map<String, String> post = {
-                'title': titleValue,
-                'description': descriptionValue,
-                'image': 'assets/mountains.jpg'
-              };
-              widget.addProduct(post);
-              Navigator.pushReplacementNamed(context, '/posts');
-            },
+            onPressed: _submitForm,
           )
         ],
+      ),
+      ),
       ),
     );
   }

@@ -8,8 +8,19 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  String _userNameValue = '';
-  String _passwordValue = '';
+  final Map<String, dynamic> _formData = {
+    'email': null,
+    'password': null,
+  };
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void _submitForm() {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
+    Navigator.pushReplacementNamed(context, '/posts');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,25 +45,35 @@ class _AuthPageState extends State<AuthPage> {
         padding: EdgeInsets.symmetric(vertical: 75.0, horizontal: 25.0),
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
+            child: Form(
+              key: _formKey,
+              child: Column(
           children: <Widget>[
-            TextField(
+            TextFormField(
               decoration: InputDecoration(labelText: 'E-mail', filled: true, fillColor: Colors.white70),
               keyboardType: TextInputType.emailAddress,
-              onChanged: (String value) {
-                setState(() {
-                  _userNameValue = value;
-                });
+              validator: (String value) {
+                if (value.isEmpty ||
+                    !RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                        .hasMatch(value)) {
+                  return 'Please enter a valid email';
+                }
+              },
+              onSaved: (String value) {
+                _formData['email'] = value;
               },
             ),
             SizedBox(height: 20.0),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white70),
               obscureText: true,
-              onChanged: (String value) {
-                setState(() {
-                  _passwordValue = value;
-                });
+              validator: (String value) {
+                if (value.isEmpty || value.length < 6) {
+                  return 'Password invalid';
+                }
+              },
+              onSaved: (String value) {
+                _formData['password'] = value;
               },
             ),
             Padding(
@@ -60,18 +81,12 @@ class _AuthPageState extends State<AuthPage> {
             child: RaisedButton(
               color: Theme.of(context).accentColor,
               child: Text('Login'),
-              onPressed: () {
-                final Map<String, String> logInfo = {
-                  'username': _userNameValue,
-                  'password': _passwordValue,
-                };
-                // widget.loginUser(logInfo);
-                Navigator.pushReplacementNamed(context, '/posts');
-              },
+              onPressed: _submitForm,
             ),
             ),
           ],
         ),
+            ),
         ),
         ),
       ),

@@ -41,7 +41,7 @@ class _MyApp extends State<MyApp>{
       routes: {
         '/': (BuildContext context) => AuthPage(),
         '/posts': (BuildContext context) => PostsPage(_posts),
-        '/admin': (BuildContext context) => PostsAdminPage(_addPost, _removePost),
+        '/admin': (BuildContext context) => PostsAdminPage(_addPost, _removePost, _posts),
       },
       onGenerateRoute: (RouteSettings settings){
         final List<String> pathElements = settings.name.split('/');

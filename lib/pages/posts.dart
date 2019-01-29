@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../post_manager.dart';
+import '../posts.dart';
 
 class PostsPage extends StatelessWidget {
   final List<Map<String, String>> posts;
@@ -34,15 +34,11 @@ class PostsPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.account_circle),
             tooltip: 'View Profile',
-            onPressed: (){
-              Navigator.pushReplacementNamed(
-                context, 
-                '/post');
-            },
+            onPressed: () => {}
           ),
         ],
       ),
-      body: PostManager(posts),
+      body: Posts(posts),
     );
   }
 }

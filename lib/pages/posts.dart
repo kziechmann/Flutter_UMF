@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
 import '../post_manager.dart';
 
+class PostsPage extends StatelessWidget {
+  final List<Map<String, String>> posts;
+  final Function addPost;
+  final Function removePost;
 
-class PostsPage extends StatelessWidget{
+  PostsPage(this.posts, this.addPost, this.removePost);
+
   @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-        leading :IconButton(
-            icon: Icon(Icons.child_care),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: Column(children: <Widget>[
+          AppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Choose'),
           ),
+          ListTile(title: Text('Manage Posts'), onTap: () {
+            Navigator.pushReplacementNamed(
+                context, 
+                '/admin');
+          }),
+        ]),
+      ),
+      appBar: AppBar(
         title: Text('Insta-photo'),
         actions: <Widget>[
           IconButton(
@@ -24,7 +39,7 @@ class PostsPage extends StatelessWidget{
           ),
         ],
       ),
-        body: PostManager(),
-      );
-    }
+      body: PostManager(posts, addPost, removePost),
+    );
+  }
 }

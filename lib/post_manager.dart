@@ -1,44 +1,13 @@
 import 'package:flutter/material.dart';
+import 'post_control.dart';
 import './posts.dart';
 
-class PostManager extends StatefulWidget {
-  final Map<String,String> startingPost;
+class PostManager extends StatelessWidget {
+  final List<Map<String, String>> posts;
+  final Function addPost;
+  final Function removePost;
 
-  PostManager({this.startingPost}){
-
-  }
-  
-
-  @override
-  State<StatefulWidget> createState() {
-    return _PostManagerState();
-  }
-}
-
-class _PostManagerState extends State<PostManager> {
-  final List<Map<String,String>> _posts = [];
-
-  @override
-  void initState(){
-    if (widget.startingPost != null) {
-      _posts.add(widget.startingPost);
-    }
-
-    super.initState();
-  }
-
-   void _addPost(Map<String, String> post) {
-    setState(() {
-      _posts.add(post);
-    });
-  }
-
-
-   void _removePost(int index) {
-    setState(() {
-      _posts.removeAt(index);
-    });
-  }
+  PostManager(this.posts, this.addPost, this.removePost); 
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +15,9 @@ class _PostManagerState extends State<PostManager> {
       children: [
         Container(
           margin: EdgeInsets.all(10.0),
-          child: RaisedButton(
-            color: Theme.of(context).primaryColor,
-            onPressed: () {
-              setState(() {
-                _posts.add({'title': 'MountainPost', 'image': 'assets/mountains.jpg'});
-              });
-            },
-            child: Text('Add Post'),
-          ),
+          child: PostControl(addPost)
         ),
-        Expanded(child: Posts(_posts, removePost: _removePost))
+        Expanded(child: Posts(posts, removePost: removePost))
       ],
     );
   }

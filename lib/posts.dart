@@ -21,12 +21,9 @@ class Posts extends StatelessWidget {
             children: <Widget>[
               FlatButton(
                 child: Text('Details'),
-                onPressed: () => Navigator.push<bool>(
+                onPressed: () => Navigator.pushNamed<bool>(
                       context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => PostPage(
-                            posts[index]['title'], posts[index]['image']),
-                      ),
+                      '/post/' + index.toString()
                     ).then((bool value){
                       if (value) {
                         removePost(index);

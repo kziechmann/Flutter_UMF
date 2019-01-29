@@ -1,9 +1,34 @@
 import 'package:flutter/material.dart';
 import './pages/auth.dart';
+import './pages/post.dart';
+import './pages/posts.dart';
+import './pages/admin.dart';
+
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyApp();
+  }
+}
+
+class _MyApp extends State<MyApp>{
+  final List<Map<String,String>> _posts = [];
+
+   void _addPost(Map<String, String> post) {
+    setState(() {
+      _posts.add(post);
+    });
+  }
+
+   void _removePost(int index) {
+    setState(() {
+      _posts.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +38,31 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.orange,
         
       ),
-      home: AuthPage(),
+      routes: {
+        '/': (BuildContext context) => PostsPage(_posts, _addPost, _removePost),
+        '/admin': (BuildContext context) => PostsAdminPage(),
+      },
+      onGenerateRoute: (RouteSettings settings){
+        final List<String> pathElements = settings.name.split('/');
+
+        if (pathElements[0] != ''){
+          return null;
+        }
+         if (pathElements[1] == 'post') {
+          final int index = int.parse(pathElements[2]);
+          return MaterialPageRoute<bool>(
+                        builder: (BuildContext context) => PostPage(
+                            _posts[index]['title'], _posts[index]['image']),
+                      );
+      
+        }       
+        return null;
+      },
+      onUnknownRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>
+                PostsPage(_posts, _addPost, _removePost));
+      },
     );
   }
 }

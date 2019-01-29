@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './pages/auth.dart';
 import './pages/post.dart';
 import './pages/posts.dart';
 import './pages/admin.dart';
@@ -39,8 +38,8 @@ class _MyApp extends State<MyApp>{
         
       ),
       routes: {
-        '/': (BuildContext context) => PostsPage(_posts, _addPost, _removePost),
-        '/admin': (BuildContext context) => PostsAdminPage(),
+        '/': (BuildContext context) => PostsPage(_posts),
+        '/admin': (BuildContext context) => PostsAdminPage(_addPost, _removePost),
       },
       onGenerateRoute: (RouteSettings settings){
         final List<String> pathElements = settings.name.split('/');
@@ -50,7 +49,7 @@ class _MyApp extends State<MyApp>{
         }
          if (pathElements[1] == 'post') {
           final int index = int.parse(pathElements[2]);
-          return MaterialPageRoute<bool>(
+          return MaterialPageRoute(
                         builder: (BuildContext context) => PostPage(
                             _posts[index]['title'], _posts[index]['image']),
                       );
@@ -61,7 +60,7 @@ class _MyApp extends State<MyApp>{
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
             builder: (BuildContext context) =>
-                PostsPage(_posts, _addPost, _removePost));
+                PostsPage(_posts));
       },
     );
   }

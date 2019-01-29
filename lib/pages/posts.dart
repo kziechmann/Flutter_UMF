@@ -3,10 +3,9 @@ import '../post_manager.dart';
 
 class PostsPage extends StatelessWidget {
   final List<Map<String, String>> posts;
-  final Function addPost;
-  final Function removePost;
 
-  PostsPage(this.posts, this.addPost, this.removePost);
+
+  PostsPage(this.posts);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class PostsPage extends StatelessWidget {
           ),
         ],
       ),
-      body: PostManager(posts, addPost, removePost),
+      body: PostManager(posts),
     );
   }
 }

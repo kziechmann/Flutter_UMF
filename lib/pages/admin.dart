@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import './posts.dart';
 import 'postList.dart';
 import 'createPost.dart';
 
 class PostsAdminPage extends StatelessWidget {
+  final Function addPost;
+  final Function removePost;
+
+  PostsAdminPage( this.addPost, this.removePost);
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,7 +40,7 @@ class PostsAdminPage extends StatelessWidget {
       ),
       body: TabBarView(
         children: <Widget>[
-          CreatePostsPage(),
+          CreatePostsPage( this.addPost),
           PostListPage(),
         ],
         ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import './pages/post.dart';
 
 class Posts extends StatelessWidget {
   final List<Map<String, String>> posts;
-  final Function removePost;
+ 
 
-  Posts(this.posts, {this.removePost}) {}
+  Posts(this.posts) {}
 
   Widget _buildPost(
     BuildContext context,
@@ -24,11 +23,7 @@ class Posts extends StatelessWidget {
                 onPressed: () => Navigator.pushNamed<bool>(
                       context,
                       '/post/' + index.toString()
-                    ).then((bool value){
-                      if (value) {
-                        removePost(index);
-                      }
-                    }),
+                    ),
               )
             ],
           )

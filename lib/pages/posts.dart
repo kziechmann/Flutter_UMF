@@ -24,7 +24,7 @@ class PostsPage extends StatelessWidget {
         ]),
       ),
       appBar: AppBar(
-        title: Text('Insta-photo'),
+        title: Text('Insta-photo', style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'VeganStyle'),),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add_a_photo),

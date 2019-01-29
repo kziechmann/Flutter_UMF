@@ -40,7 +40,7 @@ class PostPage extends StatelessWidget {
       return Future.value(false);
     } ,child: Scaffold(
       appBar: AppBar(
-        title: Text('title'),
+        title: Text('Insta-photo', style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'VeganStyle'),),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

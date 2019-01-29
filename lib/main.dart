@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './pages/post.dart';
 import './pages/posts.dart';
 import './pages/admin.dart';
+import './pages/auth.dart';
 
 
 void main() => runApp(MyApp());
@@ -38,7 +39,8 @@ class _MyApp extends State<MyApp>{
         
       ),
       routes: {
-        '/': (BuildContext context) => PostsPage(_posts),
+        '/': (BuildContext context) => AuthPage(),
+        '/posts': (BuildContext context) => PostsPage(_posts),
         '/admin': (BuildContext context) => PostsAdminPage(_addPost, _removePost),
       },
       onGenerateRoute: (RouteSettings settings){

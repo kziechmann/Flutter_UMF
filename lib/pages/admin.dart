@@ -25,14 +25,14 @@ class PostsAdminPage extends StatelessWidget {
               onTap: () {
                  Navigator.pushReplacementNamed(
                 context, 
-                '/');
+                '/posts');
               },
             )
           ],
         ),
       ),
       appBar: AppBar(
-        title: Text('Posts List'),
+        title: Text('Insta-photo', style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'VeganStyle'),),
         bottom: TabBar(tabs: <Widget>[
                 Tab(icon: Icon(Icons.create), text: 'Create Post'),
                 Tab(icon: Icon(Icons.list), text: 'My Posts'),

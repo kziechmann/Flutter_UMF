@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Posts extends StatelessWidget {
   final List<Map<String, String>> posts;
- 
 
   Posts(this.posts) {}
 
@@ -13,20 +12,38 @@ class Posts extends StatelessWidget {
     return Card(
       child: Column(
         children: <Widget>[
+          Text(
+                posts[index]['title'],
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
           Image.asset(posts[index]['image']),
-          Text(posts[index]['title']),
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
-                child: Text('Details'),
-                onPressed: () => Navigator.pushNamed<bool>(
-                      context,
-                      '/post/' + index.toString()
-                    ),
-              )
+                IconButton(
+                  icon: Icon(Icons.favorite_border),
+                  tooltip: 'Like this post',
+                  onPressed: () => {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.add_comment),
+                  tooltip: 'Comment on this',
+                  onPressed: () => {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.share),
+                  tooltip: 'Share this',
+                  onPressed: () => {},
+                ),
             ],
-          )
+          ),
+          Column(
+            children: <Widget>[ 
+              Text(
+                posts[index]['description'],
+              ),
+            ],
+          ),
         ],
       ),
     );

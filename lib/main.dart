@@ -45,15 +45,16 @@ class _MyApp extends State<MyApp>{
       },
       onGenerateRoute: (RouteSettings settings){
         final List<String> pathElements = settings.name.split('/');
-
+        print(pathElements);
         if (pathElements[0] != ''){
           return null;
         }
+
          if (pathElements[1] == 'post') {
           final int index = int.parse(pathElements[2]);
           return MaterialPageRoute(
                         builder: (BuildContext context) => PostPage(
-                            _posts[index]['title'], _posts[index]['image']),
+                            _posts[index]['title'], _posts[index]['description'], _posts[index]['image']),
                       );
       
         }       

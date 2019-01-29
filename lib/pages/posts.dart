@@ -34,7 +34,11 @@ class PostsPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.account_circle),
             tooltip: 'View Profile',
-            onPressed: () => {},
+            onPressed: (){
+              Navigator.pushReplacementNamed(
+                context, 
+                '/post');
+            },
           ),
         ],
       ),

@@ -33,10 +33,11 @@ class _AuthPageState extends State<AuthPage> {
         ),
         padding: EdgeInsets.symmetric(vertical: 75.0, horizontal: 25.0),
         child: Center(
-          child: ListView(
+          child: SingleChildScrollView(
+            child: Column(
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(labelText: 'E-mail'),
+              decoration: InputDecoration(labelText: 'E-mail', filled: true, fillColor: Colors.white70),
               keyboardType: TextInputType.emailAddress,
               onChanged: (String value) {
                 setState(() {
@@ -44,8 +45,9 @@ class _AuthPageState extends State<AuthPage> {
                 });
               },
             ),
+            SizedBox(height: 20.0),
             TextField(
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(labelText: 'Password', filled: true, fillColor: Colors.white70),
               obscureText: true,
               onChanged: (String value) {
                 setState(() {
@@ -53,10 +55,9 @@ class _AuthPageState extends State<AuthPage> {
                 });
               },
             ),
-            SizedBox(
-              height: 10.0,
-            ),
-            RaisedButton(
+            Padding(
+            padding: EdgeInsets.only(top: 15.0),
+            child: RaisedButton(
               color: Theme.of(context).accentColor,
               child: Text('Login'),
               onPressed: () {
@@ -67,8 +68,10 @@ class _AuthPageState extends State<AuthPage> {
                 // widget.loginUser(logInfo);
                 Navigator.pushReplacementNamed(context, '/posts');
               },
-            )
+            ),
+            ),
           ],
+        ),
         ),
         ),
       ),

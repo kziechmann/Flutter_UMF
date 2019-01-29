@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 class PostPage extends StatelessWidget {
   final String title;
+  final String description;
   final String imageUrl;
 
-  PostPage(this.title, this.imageUrl);
+  PostPage(this.title,this.description, this.imageUrl);
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -48,16 +49,17 @@ class PostPage extends StatelessWidget {
           Image.asset(imageUrl),
           Container(
             padding: EdgeInsets.all(10.0),
-            child: Text(title),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: RaisedButton(
-              color: Theme.of(context).accentColor,
-              child: Text('Delete'),
-              onPressed: () => _showWarningDialog(context),
+            child: Column(
+              children: <Widget>[
+                Text(title, style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),),
+                SizedBox(height: 10.0),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0,),
+                  child: Text(description, style: TextStyle(fontSize: 18.0, color: Colors.black54), textAlign: TextAlign.center,),
+                ),
+              ],
             ),
-          )
+          ),
         ],
       ),
     ),

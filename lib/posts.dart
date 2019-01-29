@@ -28,7 +28,11 @@ class Posts extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.add_comment),
                   tooltip: 'Comment on this',
-                  onPressed: () => {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context, 
+                      '/post/${index}');
+                  },
                 ),
                 IconButton(
                   icon: Icon(Icons.share),

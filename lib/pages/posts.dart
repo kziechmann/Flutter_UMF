@@ -10,31 +10,26 @@ class PostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(children: <Widget>[
-          AppBar(
-            automaticallyImplyLeading: false,
-            title: Text('Choose'),
-          ),
-          ListTile(title: Text('Manage Posts'), onTap: () {
-            Navigator.pushReplacementNamed(
-                context, 
-                '/admin');
-          }),
-        ]),
-      ),
       appBar: AppBar(
         title: Text('Insta-photo', style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'VeganStyle'),),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add_a_photo),
             tooltip: 'Take a Photo',
-            onPressed: () => {},
+            onPressed: (){
+              Navigator.pushReplacementNamed(
+                context, 
+                '/createPost');
+            },
           ),
           IconButton(
             icon: Icon(Icons.account_circle),
             tooltip: 'View Profile',
-            onPressed: () => {}
+            onPressed: (){
+              Navigator.pushReplacementNamed(
+                context, 
+                '/createPost');
+            },
           ),
         ],
       ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import './pages/post.dart';
 import './pages/posts.dart';
-import './pages/admin.dart';
+import './pages/createPost.dart';
 import './pages/auth.dart';
+import './pages/postList.dart';
 
 
 void main() => runApp(MyApp());
@@ -41,7 +42,8 @@ class _MyApp extends State<MyApp>{
       routes: {
         '/': (BuildContext context) => AuthPage(),
         '/posts': (BuildContext context) => PostsPage(_posts),
-        '/admin': (BuildContext context) => PostsAdminPage(_addPost, _removePost, _posts),
+        '/createPost': (BuildContext context) => CreatePostsPage(_addPost),
+        '/postList': (BuildContext context) => PostListPage(_posts, _removePost,),
       },
       onGenerateRoute: (RouteSettings settings){
         final List<String> pathElements = settings.name.split('/');

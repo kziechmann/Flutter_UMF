@@ -12,7 +12,7 @@ class CreatePostsPage extends StatefulWidget {
 }
 
 class _CreatePostsPageState extends State<CreatePostsPage> {
-  final Map<String, dynamic> _formData = {
+  final Map<String, String> _formData = {
     'title': null,
     'description': null,
     'image': 'assets/mountains.jpg'
@@ -31,7 +31,40 @@ class _CreatePostsPageState extends State<CreatePostsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.home),
+            tooltip: 'Go to feed',
+            onPressed: (){
+              Navigator.pushReplacementNamed(
+                context, 
+                '/posts');
+            },
+          ),
+        title: Text('Insta-photo', style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, fontFamily: 'VeganStyle'),),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add_a_photo),
+            tooltip: 'Take a Photo',
+            onPressed: (){
+              Navigator.pushReplacementNamed(
+                context, 
+                '/createPost');
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            tooltip: 'View Profile',
+            onPressed: (){
+              Navigator.pushReplacementNamed(
+                context, 
+                '/postList');
+            },
+          ),
+        ],
+      ),
+      body: GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
@@ -76,6 +109,7 @@ class _CreatePostsPageState extends State<CreatePostsPage> {
       ),
       ),
       ),
+    ),
     );
   }
 }
